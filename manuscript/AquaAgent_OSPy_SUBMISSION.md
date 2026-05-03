@@ -482,7 +482,7 @@ Consent for publication. Not applicable.
 
 Data availability. This study used public open-access environmental datasets retrieved from the NASA POWER Daily API, the Google Earth Engine data catalog, Sentinel-1/Sentinel-2 derived products, ISRIC SoilGrids v2.0, and published literature benchmarks. Processed scenario tables, Pareto fronts, tool traces, action memos, and evaluation artifacts are included in the reproducibility package or can be regenerated from the released scripts and documented data sources.
 
-Code availability. The AquaAgent-OSPy scenario harness, NSGA-II optimizer, GEE verification workflow, memo generator, faithfulness evaluator, and manuscript source are hosted in the public project GitHub repository: https://github.com/egpark-knu/aquaagent-ospy. A public archival release of the submission-associated version can be provided according to journal policy.
+Code availability. The AquaAgent-OSPy scenario harness, NSGA-II optimizer, GEE verification workflow, memo generator, faithfulness evaluator, and manuscript source are hosted in the public project GitHub repository: https://github.com/egpark-knu/aquaagent-ospy-reproducibility. A public archival release of the submission-associated version can be provided according to journal policy.
 
 Materials availability. Not applicable, no new physical materials were generated.
 
