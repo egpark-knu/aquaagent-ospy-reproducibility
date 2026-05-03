@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+*.log
+
+# Data (keep CSVs and JSONs, exclude large weather raw files)
+data/processed/weather_nasa_power_*.csv
+
+# Figures (regeneratable)
+# keep figures/*.pdf — they're small
+
+# Conda/venv
+.venv/
+ENV/
+
+# Internal coordination (do not push to GitHub)
+communication/
+docs/codex_refine_review_*.md
+docs/codex1_ops_check.md
+docs/gate0_aquacrop_import_check*.md
+docs/gate1_*.md
+docs/sentinel_watch.md
+docs/worker_heartbeat.md
+docs/orchestration_status.md
+
+# Old rejected site data
+data/processed/weather_aquacrop_case1_chungnam*.csv
+data/processed/weather_aquacrop_case2_jeonnam*.csv
+data/processed/pareto_front_case1_chungnam*.csv
+data/processed/pareto_front_case2_jeonnam*.csv
+data/processed/scenario_results_case3_*.csv

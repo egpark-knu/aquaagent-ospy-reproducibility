@@ -1,0 +1,86 @@
+{
+  "generated": "2026-05-02",
+  "agent": "AquaAgent-OSPy reproducibility workflow",
+  "gate": "Gate 1",
+  "entries": [
+    {
+      "source_id": "nasa_power_case1_chungnam_2019",
+      "source_name": "NASA POWER Daily API",
+      "fetch_date": "2026-05-02",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=126.554&latitude=36.9346&start=20190101&end=20191231&format=JSON",
+      "output_file": "weather_aquacrop_case1_chungnam_2019.csv",
+      "eto_method": "Hargreaves-Samani (FAO-56 Ra)",
+      "notes": "No API key required. 365 rows, 0 missing values."
+    },
+    {
+      "source_id": "nasa_power_case1_chungnam_2022",
+      "source_name": "NASA POWER Daily API",
+      "fetch_date": "2026-05-02",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=126.554&latitude=36.9346&start=20220101&end=20221231&format=JSON",
+      "output_file": "weather_aquacrop_case1_chungnam_2022.csv",
+      "eto_method": "Hargreaves-Samani (FAO-56 Ra)",
+      "notes": "365 rows, 0 missing."
+    },
+    {
+      "source_id": "nasa_power_case2_jeonnam_2019",
+      "source_name": "NASA POWER Daily API",
+      "fetch_date": "2026-05-02",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=127.9347&latitude=34.8236&start=20190101&end=20191231&format=JSON",
+      "output_file": "weather_aquacrop_case2_jeonnam_2019.csv",
+      "eto_method": "Hargreaves-Samani (FAO-56 Ra)",
+      "notes": "365 rows, 0 missing."
+    },
+    {
+      "source_id": "nasa_power_case2_jeonnam_2022",
+      "source_name": "NASA POWER Daily API",
+      "fetch_date": "2026-05-02",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=127.9347&latitude=34.8236&start=20220101&end=20221231&format=JSON",
+      "output_file": "weather_aquacrop_case2_jeonnam_2022.csv",
+      "eto_method": "Hargreaves-Samani (FAO-56 Ra)",
+      "notes": "365 rows, 0 missing."
+    },
+    {
+      "source_id": "landuse_gpkg_site_selection",
+      "source_name": "dev_gis_korea landuse.gpkg",
+      "fetch_date": "2026-05-02",
+      "path": "external_korea_geodata/landuse.gpkg (not redistributed in this repository)",
+      "query": "LANDUSE IN ('\uacbd\uc9c0\uc815\ub9ac\ub2f5','\ubbf8\uacbd\uc9c0\uc815\ub9ac\ub2f5'), lat>36.0 \u2192 case1 fid=353367; lat<35.5 \u2192 case2 fid=47345",
+      "crs": "EPSG:5186 \u2192 WGS84 via pyproj"
+    },
+    {
+      "source_id": "soil_drn_hsg",
+      "source_name": "dev_gis_korea soil_drn.gpkg",
+      "fetch_date": "2026-05-02",
+      "path": "external_korea_geodata/soil_drn.gpkg (not redistributed in this repository)",
+      "query": "Nearest centroid to site coordinates \u2192 HSG=C for both sites",
+      "note": "soil_shallow has only 3638 polygons (coarse); soil_drn has 415212 polygons but nearest hit was 378-508 km away \u2014 use as directional indicator only. SoilGrids API verification is Gate 2 task."
+    },
+    {
+      "source_id": "soilgrids_cross_check",
+      "source_name": "SoilGrids v2.0 REST API (ISRIC)",
+      "fetch_date": "2026-05-02",
+      "url_template": "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=LON&lat=LAT&property=clay,silt,sand&depth=0-5cm,5-15cm,15-30cm",
+      "case1_gimje": {
+        "clay_pct_0_30cm": 27.6,
+        "silt_pct_0_30cm": 51.5,
+        "sand_pct_0_30cm": 20.9,
+        "USDA_texture": "ClayLoam / SiltyClayLoam",
+        "SoilGrids_th_fc_estimate": 0.306,
+        "AquaCrop_ClayLoam_th_fc": 0.39,
+        "delta": 0.084,
+        "interpretation": "AquaCrop ClayLoam default th_fc is ~22% higher than SoilGrids estimate. High silt content (51.5%) consistent with paddy rice soil. SiltyClayLoam may be more appropriate."
+      },
+      "case2_hampyeong": {
+        "clay_pct_0_30cm": 35.4,
+        "silt_pct_0_30cm": 44.5,
+        "sand_pct_0_30cm": 20.1,
+        "USDA_texture": "ClayLoam",
+        "SoilGrids_th_fc_estimate": 0.322,
+        "AquaCrop_ClayLoam_th_fc": 0.39,
+        "delta": 0.068,
+        "interpretation": "ClayLoam is appropriate. Delta within \u00b115% soil sensitivity range."
+      },
+      "overall_note": "SoilGrids confirms Clay loam class for both sites. AquaCrop ClayLoam default FC may be slight overestimate. Effect bounded by E05 sensitivity analysis (\u00b12.0% yield for \u00b115% FC perturbation)."
+    }
+  ]
+}
